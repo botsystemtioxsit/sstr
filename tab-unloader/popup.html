@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <section class="memory">
+    <div class="free"><span id="free">…</span> ГБ свободно</div>
+    <div class="bar"><div id="bar-fill"></div></div>
+    <div class="muted">из <span id="total">…</span> ГБ · выгружено за сеанс: <span id="count">0</span></div>
+  </section>
+
+  <button id="discard-now">Выгрузить фоновые вкладки сейчас</button>
+  <div id="discard-result" class="muted"></div>
+
+  <form id="settings">
+    <label class="row">
+      <input type="checkbox" name="enabled">
+      Автоматическая выгрузка
+    </label>
+    <label>
+      Выгружать, когда свободно меньше (МБ)
+      <input type="number" name="thresholdMb" required min="100" max="16000" step="50">
+    </label>
+    <label>
+      Не трогать вкладки, открытые за последние (мин)
+      <input type="number" name="idleMinutes" required min="0" max="240">
+    </label>
+    <label class="row">
+      <input type="checkbox" name="protectPinned">
+      Не трогать закреплённые вкладки
+    </label>
+    <label>
+      Никогда не выгружать сайты (по одному в строке)
+      <textarea name="whitelist" rows="4" placeholder="music.youtube.com&#10;mail.google.com"></textarea>
+    </label>
+    <div id="saved" class="muted"></div>
+  </form>
+
+  <script src="popup.js"></script>
+</body>
+</html>
