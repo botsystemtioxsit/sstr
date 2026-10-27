@@ -5,7 +5,7 @@ name: Release zip
 # Эту ссылку использует каталог Ghost Shell Launcher.
 on:
   push:
-    branches: [main]
+    branches: [main, claude/chromebook-os-optimization-u5vs0c]
   workflow_dispatch:
 
 permissions:
