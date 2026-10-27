@@ -1,0 +1,26 @@
+name: Release zip
+
+# Кладёт расширение в релиз «latest» под постоянным именем:
+# https://github.com/botsystemtioxsit/sstr/releases/download/latest/tab-unloader.zip
+# Эту ссылку использует каталог Ghost Shell Launcher.
+on:
+  push:
+    branches: [main, claude/chromebook-os-optimization-u5vs0c]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Собрать zip
+        run: cd tab-unloader/.. && zip -r tab-unloader.zip tab-unloader
+      - name: Выложить в релиз latest
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release view latest >/dev/null 2>&1 || gh release create latest --title "Tab Unloader — последняя сборка" --notes "Расширение для Chrome/ChromeOS. Обновляется автоматически."
+          gh release upload latest tab-unloader.zip --clobber
